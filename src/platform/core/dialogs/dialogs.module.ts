@@ -3,14 +3,14 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+import { MdDialogModule, MdInputModule, MdButtonModule } from '@angular/material';
 
 import { TdDialogComponent, TdDialogTitleDirective,
          TdDialogActionsDirective, TdDialogContentDirective } from './dialog.component';
 import { TdAlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { TdConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { TdPromptDialogComponent } from './prompt-dialog/prompt-dialog.component';
-import { TdDialogService } from './services/dialog.service';
+import { TdDialogService, DIALOG_PROVIDER } from './services/dialog.service';
 
 const TD_DIALOGS: Type<any>[] = [
   TdAlertDialogComponent,
@@ -36,27 +36,23 @@ export { TdDialogService, TdDialogComponent, TdDialogTitleDirective,
   imports: [
     FormsModule,
     CommonModule,
-    MaterialModule.forRoot(),
+    MdDialogModule,
+    MdInputModule,
+    MdButtonModule,
   ],
   declarations: [
     TD_DIALOGS,
   ],
   exports: [
-    FormsModule,
-    CommonModule,
-    MaterialModule,
-
     TD_DIALOGS,
+  ],
+  providers: [
+    DIALOG_PROVIDER,
   ],
   entryComponents: [
     TD_DIALOGS_ENTRY_COMPONENTS,
   ],
 })
 export class CovalentDialogsModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CovalentDialogsModule,
-      providers: [ TdDialogService ],
-    };
-  }
+
 }

@@ -1,5 +1,6 @@
 import { Component, Directive, Input, ContentChildren, OnInit, OnDestroy, forwardRef, Inject,
-         QueryList, SecurityContext } from '@angular/core';
+         QueryList, SecurityContext, Optional } from '@angular/core';
+import { Router } from '@angular/router';
 import { SafeResourceUrl, SafeStyle, DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -32,7 +33,7 @@ export class TdNavigationDrawerComponent implements OnInit, OnDestroy {
     return this._menuToggled;
   }
 
-  @ContentChildren(TdNavigationDrawerMenuDirective) private _drawerMenu: QueryList<TdNavigationDrawerMenuDirective>;
+  @ContentChildren(TdNavigationDrawerMenuDirective) _drawerMenu: QueryList<TdNavigationDrawerMenuDirective>;
 
   /**
    * Checks if there is a [TdNavigationDrawerMenuDirective] as content.
@@ -78,6 +79,13 @@ export class TdNavigationDrawerComponent implements OnInit, OnDestroy {
   @Input('color') color: string;
 
   /**
+   * navigationRoute?: string
+   *
+   * option to set the combined route for the icon, logo, and sidenavTitle.
+   */
+  @Input('navigationRoute') navigationRoute: string;
+
+  /**
    * backgroundUrl?: SafeResourceUrl
    *
    * image to be displayed as the background of the toolbar.
@@ -112,7 +120,15 @@ export class TdNavigationDrawerComponent implements OnInit, OnDestroy {
    */
   @Input('email') email: string;
 
+  /**
+   * Checks if router was injected.
+   */
+  get routerEnabled(): boolean {
+    return !!this._router && !!this.navigationRoute;
+  }
+
   constructor(@Inject(forwardRef(() => TdLayoutComponent)) private _layout: TdLayoutComponent,
+              @Optional() private _router: Router,
               private _sanitize: DomSanitizer) {}
 
   ngOnInit(): void {
@@ -131,6 +147,13 @@ export class TdNavigationDrawerComponent implements OnInit, OnDestroy {
   toggleMenu(): void {
     if (this.isMenuAvailable) {
       this._menuToggled = !this._menuToggled;
+    }
+  }
+
+  handleNavigationClick(): void {
+    if (this.routerEnabled) {
+      this._router.navigateByUrl(this.navigationRoute);
+      this.close();
     }
   }
 

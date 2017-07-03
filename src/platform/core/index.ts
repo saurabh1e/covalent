@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@angular/material';
-
 /**
  * COMMON
  */
@@ -84,6 +82,13 @@ import { CovalentMenuModule } from './menu/menu.module';
 export * from './menu/menu.module';
 
 /**
+ * MESSAGE
+ */
+
+import { CovalentMessageModule } from './message/message.module';
+export * from './message/message.module';
+
+/**
  * NOTIFICATIONS
  */
 
@@ -110,58 +115,3 @@ export * from './search/search.module';
 
 import { CovalentStepsModule } from './steps/steps.module';
 export * from './steps/steps.module';
-
-@NgModule({
-  imports: [
-    HttpModule,
-    JsonpModule,
-    FormsModule,
-    CommonModule,
-    MaterialModule.forRoot(),
-    CovalentCommonModule.forRoot(),
-    CovalentChipsModule.forRoot(),
-    CovalentDataTableModule.forRoot(),
-    CovalentDialogsModule.forRoot(),
-    CovalentExpansionPanelModule.forRoot(),
-    CovalentFileModule.forRoot(),
-    CovalentJsonFormatterModule.forRoot(),
-    CovalentLayoutModule.forRoot(),
-    CovalentLoadingModule.forRoot(),
-    CovalentMediaModule.forRoot(),
-    CovalentMenuModule.forRoot(),
-    CovalentNotificationsModule.forRoot(),
-    CovalentPagingModule.forRoot(),
-    CovalentSearchModule.forRoot(),
-    CovalentStepsModule.forRoot(),
-  ],
-  exports: [
-    HttpModule,
-    JsonpModule,
-    FormsModule,
-    CommonModule,
-    MaterialModule,
-    CovalentCommonModule,
-    CovalentChipsModule,
-    CovalentDataTableModule,
-    CovalentDialogsModule,
-    CovalentExpansionPanelModule,
-    CovalentFileModule,
-    CovalentJsonFormatterModule,
-    CovalentLayoutModule,
-    CovalentLoadingModule,
-    CovalentMediaModule,
-    CovalentMenuModule,
-    CovalentNotificationsModule,
-    CovalentPagingModule,
-    CovalentSearchModule,
-    CovalentStepsModule,
-  ],
-})
-export class CovalentCoreModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CovalentCoreModule,
-      providers: [ ],
-    };
-  }
-}

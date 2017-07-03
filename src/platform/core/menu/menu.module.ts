@@ -2,9 +2,7 @@ import { Type } from '@angular/core';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@angular/material';
-
-import { CovalentCommonModule } from '../common/common.module';
+import { MdMenuModule, MdListModule } from '@angular/material';
 
 import { TdMenuComponent } from './menu.component';
 
@@ -17,25 +15,16 @@ export { TdMenuComponent } from './menu.component';
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule.forRoot(),
-    CovalentCommonModule.forRoot(),
+    MdMenuModule,
+    MdListModule,
   ],
   declarations: [
     TD_MENU,
   ],
   exports: [
-    CommonModule,
-    MaterialModule,
-    CovalentCommonModule,
-
     TD_MENU,
   ],
 })
 export class CovalentMenuModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CovalentMenuModule,
-      providers: [ ],
-    };
-  }
+
 }
